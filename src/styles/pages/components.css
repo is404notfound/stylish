@@ -1,0 +1,31 @@
+.components-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right,
+      #ffffff,
+      #ff84c6 40%,
+      #f08080 60%,
+      #ffffff);
+  opacity: 0.8;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.content-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.left-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.right-section {
+  flex: 1;
+  padding: 20px;
+}

@@ -5,8 +5,10 @@
   width: 140vw;
   background-color: #fff;
   background-image: url('../../assets/home-background-cloudy.jpeg');
-  background-size: auto 120%;
+  background-size: auto 140%;
   background-repeat: repeat-x;
+  overflow-y: hidden;
+
 }
 
 .cloud {

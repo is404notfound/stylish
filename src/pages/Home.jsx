@@ -14,6 +14,7 @@ function Home() {
     const [backgroundColor, setBackgroundColor] = useState('transparent');
     const [showMessage, setShowMessage] = useState(false);
     const [showSwipeMessage, setShowSwipeMessage] = useState(true);
+    const scrollContainerRef = useRef(null);
     const backgroundRef = useRef(null);
     const circleRef = useRef(null);
     const navigate = useNavigate();
@@ -21,6 +22,25 @@ function Home() {
     const goToListPage = () => {
         navigate('/components');
     }
+
+    useEffect(() => {
+        
+        const container = scrollContainerRef.current;
+
+        const handleWheel = (event) => {
+            container.scrollLeft += event.deltaX;
+        };
+
+        if (container) {
+            container.addEventListener('wheel', handleWheel);
+        }
+
+        return () => {
+            if (container) {
+                container.removeEventListener('wheel', handleWheel);
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -74,7 +94,7 @@ function Home() {
     }, []);
 
     return (
-        <div className="container">
+        <div className="container" ref={scrollContainerRef}>
             <div className="background" style={{ backgroundColor: backgroundColor }} ref={backgroundRef}>
                 {showMessage && (
                     <div className="message" style={{
@@ -89,7 +109,7 @@ function Home() {
                 )}
                 <div className="circle-container" style={{
                 }}>
-                    {showSwipeMessage && (<span className='circle-message'> swipe me » </span>)}
+                    {showSwipeMessage && (<span className='circle-message'> scroll me » </span>)}
                     <div className="animated-circle" ref={circleRef} style={{
                         width: circleSize,
                         height: circleSize,
