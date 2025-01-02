@@ -22,14 +22,11 @@ function Home() {
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (!container) return;
-
         const handleWheel = (event) => {
-            container.scrollLeft += event.deltaX;
+            container.scrollLeft += event.deltaY;
         };
 
-        if (container) {
-            container.addEventListener('wheel', handleWheel);
-        }
+        container.addEventListener('wheel', handleWheel);
 
         return () => {
             container.removeEventListener('wheel', handleWheel);
@@ -77,7 +74,7 @@ function Home() {
                         setTimeout(() => {
                             navigate('/components');
                         }, 2000);
-                    } else {
+                    } else { 
                         setShowMessage(false);
                     }
                 }

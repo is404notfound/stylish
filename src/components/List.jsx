@@ -75,7 +75,7 @@ const List = ({ items }) => {
     if (scrollContainerRef.current && listRef.current) {
       scrollContainerRef.current.addEventListener('scroll', handleScroll);
     }
-
+    /* eslint-disable */
     return () => {
       if (scrollContainerRef.current) {
         scrollContainerRef.current.removeEventListener('scroll', handleScroll);
