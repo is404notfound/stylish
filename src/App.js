@@ -4,10 +4,6 @@ import Components from './pages/Components';
 
 
 function App() {
-  if (window.location.pathname.endsWith('/index.html')) {
-    window.location.href = window.location.pathname.replace('/index.html', '/');
-  }
-  
   return (
     <>
       <BrowserRouter>

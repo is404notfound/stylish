@@ -21,7 +21,7 @@ function Home() {
 
     useEffect(() => {
         const container = scrollContainerRef.current;
-        if (!container) return;
+        if (!container) return; 
         const handleWheel = (event) => {
             container.scrollLeft += event.deltaY;
         };
