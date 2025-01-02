@@ -19,13 +19,9 @@ function Home() {
     const circleRef = useRef(null);
     const navigate = useNavigate();
 
-    const goToListPage = () => {
-        navigate('/components');
-    }
-
     useEffect(() => {
-        
         const container = scrollContainerRef.current;
+        if (!container) return;
 
         const handleWheel = (event) => {
             container.scrollLeft += event.deltaX;
@@ -36,18 +32,17 @@ function Home() {
         }
 
         return () => {
-            if (container) {
-                container.removeEventListener('wheel', handleWheel);
-            }
+            container.removeEventListener('wheel', handleWheel);
         };
     }, []);
 
     useEffect(() => {
         const handleScroll = () => {
+            if (!backgroundRef.current || !circleRef.current) return;
             if (backgroundRef.current && circleRef.current) {
                 const scrollPosition = window.scrollX;
                 const maxScroll = document.documentElement.scrollWidth - window.innerWidth;
-                const minCircleSize = 200; 
+                const minCircleSize = 200;
                 const maxCircleSize = Math.max(window.innerWidth, window.innerHeight) * 1.5; // 최대 크기
 
 
@@ -80,8 +75,8 @@ function Home() {
                         setShowMessage(true);
 
                         setTimeout(() => {
-                            goToListPage();
-                        }, 3000);
+                            navigate('/components');
+                        }, 2000);
                     } else {
                         setShowMessage(false);
                     }
@@ -90,8 +85,11 @@ function Home() {
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, [navigate]);
 
     return (
         <div className="container" ref={scrollContainerRef}>

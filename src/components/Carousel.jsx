@@ -18,7 +18,7 @@ const Carousel = ({ images }) => {
     }, 2000);
 
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [totalPages]);
 
   useEffect(() => {
     if (carouselRef.current) {

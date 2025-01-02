@@ -82,7 +82,7 @@ const List = ({ items }) => {
       }
       clearTimeout(scrollTimeout); 
     };
-  }, [items]);
+  }, [items, isScrolling]);
 
   return (
     <div className="scroll-container" ref={scrollContainerRef}>

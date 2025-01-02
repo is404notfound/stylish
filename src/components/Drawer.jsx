@@ -29,10 +29,6 @@ const Drawer = ({ children }) => {
       };
     }, []);
   
-      const handleClose = () => {
-          setIsOpen(false);
-      }
-  
     return (
       <>
         <div className={`drawer ${isOpen ? 'open' : ''}`} ref={drawerRef}>
