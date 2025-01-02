@@ -8,6 +8,7 @@ const AppRoutes = () => {
         <BrowserRouter>
             <Routes>
                 {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/stylish" element={<Home />} />
                 <Route path="/components" element={<Components />} />
             </Routes>
         </BrowserRouter>
