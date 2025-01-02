@@ -1,5 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
-import '../styles/Home.css';
+import '../styles/pages/home.css';
 import cloudy01 from '../assets/cloud01.png';
 import cloudy02 from '../assets/cloud02.png';
 import cloudy03 from '../assets/cloud03.png';
@@ -15,6 +16,11 @@ function Home() {
     const [showSwipeMessage, setShowSwipeMessage] = useState(true);
     const backgroundRef = useRef(null);
     const circleRef = useRef(null);
+    const navigate = useNavigate();
+
+    const goToListPage = () => {
+        navigate('/components');
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,19 +32,17 @@ function Home() {
 
 
                 if (scrollPosition <= maxScroll) {
-                    // 스케일 계산 방식 변경: 0 ~ 1 사이의 값으로 정규화
                     const progress = scrollPosition / maxScroll;
-                    // 크기 계산: 최소 크기에서 최대 크기까지 선형적으로 증가
                     const newSize = minCircleSize + (maxCircleSize - minCircleSize) * progress;
 
                     setCircleSize(newSize);
 
-                    // 배경색 변화 로직 개선 (부드러운 변화)
                     let backgroundColorValue = 'transparent';
                     if (scrollPosition > maxScroll / 2) {
                         const bgProgress = (scrollPosition - maxScroll / 2) / (maxScroll / 2);
                         const startColor = [255, 255, 255, 0];
                         const endColor = [248, 255, 221, 1];
+
                         const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * bgProgress);
                         const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * bgProgress);
                         const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * bgProgress);
@@ -56,7 +60,7 @@ function Home() {
                         setShowMessage(true);
 
                         setTimeout(() => {
-                            window.location.href = '/list';
+                            goToListPage();
                         }, 3000);
                     } else {
                         setShowMessage(false);

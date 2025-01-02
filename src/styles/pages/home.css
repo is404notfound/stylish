@@ -4,7 +4,7 @@
   height: 100vh;
   width: 140vw;
   background-color: #fff;
-  background-image: url('../assets/home-background-cloudy.jpeg');
+  background-image: url('../../assets/home-background-cloudy.jpeg');
   background-size: auto 120%;
   background-repeat: repeat-x;
 }
@@ -152,14 +152,14 @@
 
 
 .background {
-  position: fixed; /* 전체 화면 고정 */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent; /* 초기 배경색은 투명 */
-  z-index: 1; /* 원 뒤에 배치 */
-  transition: background-color 1s ease; /* 배경색 변화에 transition 추가 */
+  background-color: transparent; 
+  z-index: 1;
+  transition: background-color 1s ease; 
 }
 
 .circle-container {
