@@ -7,9 +7,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/stylish" element={<Home />} >
+          <Route path="/stylish" element={<Home />} />
           <Route path="/components" element={<Components />} />
-          </Route>
         </Routes>
       </BrowserRouter>
     </>
