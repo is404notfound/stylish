@@ -27,7 +27,7 @@ function Home() {
             if (backgroundRef.current && circleRef.current) {
                 const scrollPosition = window.scrollX;
                 const maxScroll = document.documentElement.scrollWidth - window.innerWidth;
-                const minCircleSize = 200; // 최소 크기
+                const minCircleSize = 200; 
                 const maxCircleSize = Math.max(window.innerWidth, window.innerHeight) * 1.5; // 최대 크기
 
 
