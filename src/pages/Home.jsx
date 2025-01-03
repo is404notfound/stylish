@@ -18,12 +18,25 @@ function Home() {
     const backgroundRef = useRef(null);
     const circleRef = useRef(null);
     const navigate = useNavigate();
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
 
     useEffect(() => {
         const container = scrollContainerRef.current;
-        if (!container) return; 
+        if (!container) return;
+
+        let throttleTimer;
+
         const handleWheel = (event) => {
-            container.scrollLeft += event.deltaY;
+            if (throttleTimer) return;
+
+            throttleTimer = setTimeout(() => {
+                window.scrollBy({
+                    left: event.deltaY,
+                    behavior: 'smooth'
+                });
+                throttleTimer = null;
+            }, 16);
         };
 
         container.addEventListener('wheel', handleWheel);
@@ -35,58 +48,81 @@ function Home() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (!backgroundRef.current || !circleRef.current) return;
-            if (backgroundRef.current && circleRef.current) {
-                const scrollPosition = window.scrollX;
-                const maxScroll = document.documentElement.scrollWidth - window.innerWidth;
-                const minCircleSize = 200;
-                const maxCircleSize = Math.max(window.innerWidth, window.innerHeight) * 1.5; // 최대 크기
-
-
-                if (scrollPosition <= maxScroll) {
-                    const progress = scrollPosition / maxScroll;
-                    const newSize = minCircleSize + (maxCircleSize - minCircleSize) * progress;
-
-                    setCircleSize(newSize);
-
-                    let backgroundColorValue = 'transparent';
-                    if (scrollPosition > maxScroll / 2) {
-                        const bgProgress = (scrollPosition - maxScroll / 2) / (maxScroll / 2);
-                        const startColor = [255, 255, 255, 0];
-                        const endColor = [248, 255, 221, 1];
-
-                        const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * bgProgress);
-                        const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * bgProgress);
-                        const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * bgProgress);
-                        const a = Math.round(startColor[3] + (endColor[3] - startColor[3]) * bgProgress);
-
-                        backgroundColorValue = `rgba(${r}, ${g}, ${b}, ${a})`;
-                    }
-                    setBackgroundColor(backgroundColorValue);
-
-                    if (scrollPosition > 0) {
-                        setShowSwipeMessage(false);
-                    }
-
-                    if (scrollPosition >= maxScroll - 50) {
-                        setShowMessage(true);
-
-                        setTimeout(() => {
-                            navigate('/components');
-                        }, 2000);
-                    } else { 
-                        setShowMessage(false);
-                    }
-                }
-            }
+            handleCircleSizeChange(window.scrollX);
         };
 
         window.addEventListener('scroll', handleScroll);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-        }
+        };
+        // eslint-disable-next-line
     }, [navigate]);
+
+    const handleCircleSizeChange = (scrollPosition) => {
+        if (!backgroundRef.current || !circleRef.current) return;
+
+        const maxScroll = document.documentElement.scrollWidth - window.innerWidth;
+        const minCircleSize = 200;
+        const maxCircleSize = Math.max(window.innerWidth, window.innerHeight) * 1.5;
+
+        if (scrollPosition <= maxScroll) {
+            const progress = scrollPosition / maxScroll;
+            const newSize = minCircleSize + (maxCircleSize - minCircleSize) * progress;
+            setCircleSize(newSize);
+
+            let backgroundColorValue = 'transparent';
+            if (scrollPosition > maxScroll / 2) {
+                const bgProgress = (scrollPosition - maxScroll / 2) / (maxScroll / 2);
+                const startColor = [255, 255, 255, 0];
+                const endColor = [248, 255, 221, 1];
+
+                const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * bgProgress);
+                const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * bgProgress);
+                const b = Math.round(startColor[2] + (endColor[2] - startColor[2]) * bgProgress);
+                const a = Math.round(startColor[3] + (endColor[3] - startColor[3]) * bgProgress);
+
+                backgroundColorValue = `rgba(${r}, ${g}, ${b}, ${a})`;
+            }
+            setBackgroundColor(backgroundColorValue);
+
+            if (scrollPosition > 0) {
+                setShowSwipeMessage(false);
+            }
+
+            if (scrollPosition >= maxScroll - 50) {
+                setShowMessage(true);
+                setTimeout(() => {
+                    navigate('/components');
+                }, 2000);
+            } else {
+                setShowMessage(false);
+            }
+        }
+    };
+
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.clientX);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging || !scrollContainerRef.current) return;
+
+        const x = e.clientX;
+        const walk = (x - startX) * 1;
+        scrollContainerRef.current.scrollLeft -= walk;
+        setStartX(x);
+        handleCircleSizeChange(scrollContainerRef.current.scrollLeft);
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseLeave = () => {
+        setIsDragging(false);
+    }
 
     return (
         <div className="container" ref={scrollContainerRef}>
@@ -105,10 +141,18 @@ function Home() {
                 <div className="circle-container" style={{
                 }}>
                     {showSwipeMessage && (<span className='circle-message'> scroll me » </span>)}
-                    <div className="animated-circle" ref={circleRef} style={{
-                        width: circleSize,
-                        height: circleSize,
-                    }}></div>
+                    <div
+                        className="animated-circle"
+                        ref={circleRef}
+                        style={{
+                            width: circleSize,
+                            height: circleSize,
+                        }}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                        onMouseLeave={handleMouseLeave}
+                    ></div>
                 </div>
             </div>
             <div className="cloud">

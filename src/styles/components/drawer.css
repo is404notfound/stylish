@@ -11,6 +11,8 @@
     border-radius: 0 20px 20px 0;
     transition: left 1.5s ease-in-out;
     z-index: 2;
+    display: flex;
+    justify-content: center;
   }
   
   .drawer.open {
@@ -36,6 +38,9 @@
   
   .drawer nav li {
       padding: 10px 0;
+      color: rgba(133, 110, 110, 0.6);
+      font-weight: 500;
+      cursor: pointer;
   }
   
   .drawer nav a {

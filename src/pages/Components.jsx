@@ -26,6 +26,7 @@ function Components() {
           <Carousel images={[Img1, Img2, Img3, Img4, Img5, Img6]} />
         </div>
         <Drawer>
+          <li>glass morphism</li>
         </Drawer>
       </div>
     </div>

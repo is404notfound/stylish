@@ -8,7 +8,6 @@
   background-size: auto 140%;
   background-repeat: repeat-x;
   overflow-y: hidden;
-
 }
 
 .cloud {
@@ -170,6 +169,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+  cursor: grab;
 }
 
 .circle-message {
@@ -182,6 +182,7 @@
   font-size: 1rem;
   font-weight: bold;
   animation: fadeInOut 2s ease infinite;
+  cursor: grab;
 }
 
 .animated-circle {
@@ -193,6 +194,7 @@
   animation: gradientMove 3s linear infinite alternate;
   border: 5px solid rgba(255, 255, 255, 1);
   box-sizing: border-box;
+  cursor: grab;
 }
 
 @keyframes fadeInOut {
@@ -253,4 +255,20 @@
   to {
     opacity: 1;
   }
+}
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(178, 251, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 100px; 
+  background-color: rgba(249, 143, 117, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(251, 101, 119, 0.5);
 }
