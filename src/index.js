@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MainVideo from './assets/animated-video.mov';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -10,6 +11,7 @@ root.render(
     <div class="mobile-message">
       <span>반응형은 추후 적용 예정입니다.</span>
       <span>데스크탑 환경에서 확인해주세요.</span>
+      <video className="animated-video" src={MainVideo} autoPlay loop muted playsInline></video>
     </div>
     <React.StrictMode>
       <App />
