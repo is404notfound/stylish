@@ -24,11 +24,12 @@ function Home() {
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (!container) return;
-
         let throttleTimer;
 
         const handleWheel = (event) => {
             if (throttleTimer) return;
+
+            event.preventDefault();
 
             throttleTimer = setTimeout(() => {
                 window.scrollBy({
@@ -140,7 +141,7 @@ function Home() {
                 )}
                 <div className="circle-container" style={{
                 }}>
-                    {showSwipeMessage && (<span className='circle-message'> scroll me » </span>)}
+                    {showSwipeMessage && (<span className='circle-message'> swipe me » </span>)}
                     <div
                         className="animated-circle"
                         ref={circleRef}
