@@ -1,0 +1,27 @@
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 95%;
+    z-index: 100;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* transition 추가 */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header:hover {
+    cursor: pointer;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+
+    img {
+        height: 40px;
+    }
+}
