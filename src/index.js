@@ -7,7 +7,7 @@ import MainVideo from './assets/animated-video.mov';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
+  <div className="container">
     <div class="mobile-message">
       <span>반응형은 추후 적용 예정입니다.</span>
       <span>데스크탑 환경에서 확인해주세요.</span>
@@ -16,7 +16,7 @@ root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </>
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
