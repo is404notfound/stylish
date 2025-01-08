@@ -94,7 +94,7 @@ function Home() {
             if (scrollPosition >= maxScroll - 50) {
                 setShowMessage(true);
                 setTimeout(() => {
-                    navigate('/components');
+                    navigate('/stylish/components');
                 }, 2000);
             } else {
                 setShowMessage(false);
