@@ -11,10 +11,8 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path={"/components"} element={<Components />} />
           <Route path={"/stylish"} element={<Home />} />
           <Route path="/stylish/components" element={<Components />} />
         </Routes>
