@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Components from './pages/Components';
 
 function App() {
-  const PUBLIC_URL = 'https://is404notfound.github.io/stylish';
+  const PUBLIC_URL = 'https://localhost:3000/stylish';
 
   if (window.location.pathname.endsWith('/index.html')) {
     window.location.href = PUBLIC_URL;
@@ -11,9 +11,11 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path="/stylish" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path={"/components"} element={<Components />} />
+          <Route path={"/stylish"} element={<Home />} />
           <Route path="/stylish/components" element={<Components />} />
         </Routes>
       </BrowserRouter>
