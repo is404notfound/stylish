@@ -3,10 +3,8 @@ import Home from './pages/Home';
 import Components from './pages/Components';
 
 function App() {
-  const PUBLIC_URL = 'https://localhost:3000/stylish';
-
   if (window.location.pathname.endsWith('/index.html')) {
-    window.location.href = PUBLIC_URL;
+    window.location.href = 'https://is404notfound.github.io/stylish/';
   }
 
   return (
