@@ -3,9 +3,10 @@ import Home from './pages/Home';
 import Components from './pages/Components';
 
 function App() {
-  
+  const PUBLIC_URL = 'https://is404notfound.github.io/stylish';
+
   if (window.location.pathname.endsWith('/index.html')) {
-    window.location.href = 'https://is404notfound.github.io/stylish';
+    window.location.href = PUBLIC_URL;
   }
 
   return (
